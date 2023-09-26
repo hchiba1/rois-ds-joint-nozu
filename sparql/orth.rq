@@ -1,0 +1,12 @@
+# define input:inference "orth2"
+
+PREFIX : <http://purl.org/net/orth#>
+
+# SELECT (COUNT(DISTINCT ?gene2) AS ?count)
+SELECT *
+WHERE {
+  ?gene1 :hasOrtholog ?gene2 .
+  ?gene1 :taxon taxid:7955 .
+  ?gene2 :taxon taxid:8090 .
+  # VALUES ?gene1 { ncbigene:30207 }
+}

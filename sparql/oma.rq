@@ -1,0 +1,24 @@
+#!/home/chiba/.npm-global/bin/spang2
+# @endpoint https://sparql.omabrowser.org/sparql/
+# @option -as
+# @param protein=NP_177561
+# @input ("NP_571088")
+
+PREFIX oo: <http://purl.org/net/orth#>
+PREFIX upTax: <http://purl.uniprot.org/taxonomy/>
+
+# SELECT DISTINCT ?id
+SELECT ?member2 ?p ?o
+WHERE {
+  ?group oo:hasHomologousMember+ ?member1 , ?member2 .
+  ?group oo:hasTaxonomicRange upTax:41665 . # Neopterygii
+  ?member1 a oo:Protein .
+  ?member2 a oo:Protein .
+  ?member1 oo:organism <https://omabrowser.org/oma/genome/7955> .
+  ?member2 oo:organism <https://omabrowser.org/oma/genome/8090> .
+  ?member1 lscr:xrefNCBIRefSeq/dct:identifier ?protein .
+  VALUES (?protein) { ${INPUT} }
+  # ?member2 dct:identifier ?id .
+  # FILTER regex(?id, "^GLYMA_")
+  ?member2 ?p ?o .
+}

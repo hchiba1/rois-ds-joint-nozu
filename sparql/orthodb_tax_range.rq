@@ -1,0 +1,10 @@
+#!/usr/bin/env spang2
+# @endpoint orthodb
+# @option -a
+
+SELECT DISTINCT ?tax ?name ?rank
+WHERE {
+  ?s orthodb:ogBuiltAt ?tax .
+  ?tax up:scientificName ?name .
+  ?tax up:rank ?rank .
+}

@@ -1,0 +1,13 @@
+#!/usr/bin/env spang2
+# @endpoint oma
+# @option -a
+
+PREFIX oo: <http://purl.org/net/orth#>
+
+SELECT DISTINCT ?t ?label
+# SELECT (COUNT(DISTINCT ?t) AS ?count)
+WHERE {
+  ?s oo:hasTaxonomicRange ?t .
+  ?t a oo:TaxonomicRange .
+  ?t oo:taxRange ?label .
+}
